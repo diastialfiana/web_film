@@ -26,8 +26,10 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Force fresh dependency resolution for PHP 7.4 by removing composer.lock
+# and running composer update
+RUN rm -f composer.lock && \
+    composer update --no-dev --optimize-autoloader --no-interaction
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
