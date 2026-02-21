@@ -41,4 +41,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 EXPOSE $PORT
 
 # Start Laravel built-in server with automatic migration
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+CMD php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=$PORT
