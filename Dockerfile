@@ -30,7 +30,8 @@ COPY . /var/www/html
 # We ignore security audits because this is a legacy demo app
 RUN rm -f composer.lock && \
     composer config audit.block-insecure false && \
-    composer update --no-dev --optimize-autoloader --no-interaction
+    composer update --no-dev --optimize-autoloader --no-interaction && \
+    php artisan config:clear
 
 # Set permissions for Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
