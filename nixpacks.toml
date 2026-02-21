@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["php74", "php74Extensions.mysql", "php74Extensions.gd", "php74Extensions.zip"]
+
+[phases.install]
+cmds = ["composer install --no-dev --optimize-autoloader"]
+
+[phases.build]
+cmds = ["npm install && npm run prod"]
+
+[start]
+cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
