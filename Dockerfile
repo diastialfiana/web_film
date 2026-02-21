@@ -19,6 +19,10 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd tokenizer xml
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+# Fix "More than one MPM loaded" error on Railway
+RUN a2dismod mpm_event mpm_worker || true
+RUN a2enmod mpm_prefork || true
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
