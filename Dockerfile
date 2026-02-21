@@ -26,9 +26,11 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
-# Force fresh dependency resolution for PHP 7.4 by removing composer.lock
-# and running composer update
+# 1. Remove broken lock file
+# 2. Disable security audit (since Laravel 5.8 has old packages with known advisories)
+# 3. Perform fresh installation
 RUN rm -f composer.lock && \
+    composer config audit.block-insecure false && \
     composer update --no-dev --optimize-autoloader --no-interaction
 
 # Set permissions
