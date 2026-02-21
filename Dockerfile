@@ -40,6 +40,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Expose the port Railway provides
 EXPOSE $PORT
 
-# Start application using the PORT variable provided by Railway
-# We use a shell form CMD to ensure $PORT is# Start Laravel built-in server with automatic migration
+# Start Laravel built-in server with automatic migration
 CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
